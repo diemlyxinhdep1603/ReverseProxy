@@ -1,13 +1,13 @@
 
 
-```markdown
+
 # GIAI ĐOẠN 2: CÀI ĐẶT APACHE & CẤU HÌNH ĐỔI CỔNG (PHÂN TÁCH NHIỆM VỤ)
 
 🚨 **Lưu ý quan trọng:** Hiện tại Nginx đang chiếm giữ các cổng tiêu chuẩn là 80 và 443. Để xây dựng mô hình Reverse Proxy, chúng ta phải cấu hình Apache rút về "hậu trường" bằng cách thay đổi cổng lắng nghe trước khi kích hoạt dịch vụ.
 
 ---
 
-## 1. Tư duy hệ thống: Quy luật "Thêm số" của SysAdmin
+## 1. Tư duy hệ thống: Quy luật "Thêm số" 
 
 Để hiểu tại sao lại chọn các con số **8080** và **8443**, chúng ta cần dựa trên các cổng chuẩn quốc tế:
 * **HTTP (Cổng 80):** Web bình thường ➡️ Đôn lên thành **8080**.
@@ -81,4 +81,3 @@ Hệ thống phải hiển thị dòng chữ **Active: active (running)** màu x
 
 
 
-```
