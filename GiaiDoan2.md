@@ -16,7 +16,7 @@
 **Vai trò trong mô hình:** * **Nginx:** Đóng vai trò là "Lễ tân" đón khách trực tiếp ở cửa ngoài (Cổng 80/443).
 * **Apache:** Đóng vai trò là "Bếp trưởng" xử lý món ăn khó ở phía sau (Cổng 8080/8443).
 
-### Tóm tắt luồng đi theo yêu cầu của Leader:
+### Tóm tắt luồng đi theo yêu cầu:
 * **Luồng 1 (Không bảo mật):** Khách truy cập `http://` ➡️ Nginx (80) ➡️ Apache (8080).
 * **Luồng 2 (Có bảo mật):** Khách truy cập `https://` ➡️ Nginx (443) ➡️ Apache (8443).
 
