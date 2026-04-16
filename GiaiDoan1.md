@@ -1,6 +1,6 @@
 
 
-```markdown
+
 # GIAI ĐOẠN 1: CHUẨN BỊ MÔI TRƯỜNG & KHỞI TẠO DỮ LIỆU
 
 Giai đoạn này tập trung vào việc đưa mã nguồn lên máy chủ, thiết lập cơ sở dữ liệu và phân quyền hệ thống. Đây là nền móng quan trọng để đảm bảo Web Server có thể đọc và thực thi mã nguồn chính xác mà không gặp lỗi phân quyền.
@@ -79,7 +79,7 @@ rm /var/www/linhlt_db.sql /var/www/linhlt_wp_lodoz.sql
 
 ---
 
-### 📖 Giải thích kỹ thuật:
+### 📖 Giải thích :
 * **Quyền 775:** Cho phép Chủ sở hữu (Owner) và Nhóm (Group www-data) có quyền Đọc/Ghi/Chạy, trong khi người dùng khác chỉ có quyền Đọc/Chạy. Điều này đảm bảo tính bảo mật tối thiểu cho máy chủ.
 * **Logic di chuyển file:** Việc đưa code về `/var/www/` giúp hệ thống tuân thủ cấu trúc phân cấp thư mục của Linux (FHS), giúp các kỹ sư hệ thống khác dễ dàng quản trị và bảo trì sau này.
 ```
