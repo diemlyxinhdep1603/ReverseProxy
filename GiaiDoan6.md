@@ -1,5 +1,4 @@
 
-```markdown
 # GIAI ĐOẠN 6: DEBUG & KẾT NỐI CƠ SỞ DỮ LIỆU 
 
 Sau khi xây dựng xong hệ thống Web Server, bước cuối cùng và quan trọng nhất là "cắm điện" cho ứng dụng bằng cách kết nối mã nguồn với cơ sở dữ liệu và xử lý các lỗi phát sinh do sự khác biệt môi trường.
@@ -94,4 +93,3 @@ Hệ thống đã vận hành hoàn hảo với các chỉ số:
 * **Mã phản hồi:** 200 OK.
 * **SSL:** Hợp lệ (Green Lock).
 * **Giao diện:** Hiển thị đúng nội dung của dự án KIA K5 và Coza Store.
-```
