@@ -1,6 +1,4 @@
 
-
-```markdown
 # GIAI ĐOẠN 4: CẤU HÌNH NGINX REVERSE PROXY (CHUẨN ENTERPRISE)
 
 Đây là giai đoạn quyết định sự thành công của bài thực hành. Cấu hình này không chỉ đơn thuần là chuyển tiếp yêu cầu, mà còn tối ưu hóa hiệu suất theo tiêu chuẩn doanh nghiệp bằng cách giải quyết triệt để 3 yêu cầu từ Leader:
@@ -173,10 +171,9 @@ sudo systemctl restart nginx
 
 ---
 
-## 4. Giải trình kỹ thuật 
+## 4. Giải thích 
 
-Khi được hỏi về logic xử lý trong file cấu hình này, em sẽ phản hồi dựa trên các điểm cốt lõi sau:
+Khi được hỏi về logic xử lý trong file cấu hình này, trả lời dựa trên các điểm cốt lõi sau:
 * **Xử lý Static File tại tầng Proxy:** Em đã định nghĩa cụ thể đường dẫn `root` và sử dụng block Regex `location ~* \.(jpg|css...)`. Bên trong đó dùng `try_files $uri` giúp Nginx trực tiếp quét ổ cứng và trả kết quả file tĩnh cho khách hàng. Điều này giúp giảm tải hoàn toàn cho Apache.
 * **Luồng dữ liệu End-to-End:** Bằng cách loại bỏ lệnh `return 301`, em đảm bảo luồng đi đúng yêu cầu của anh: Khách vào HTTP sẽ thấy HTTP (qua cổng 8080), khách vào HTTPS sẽ được bảo vệ bởi SSL xuyên suốt (qua cổng 8443).
 * **Proxy Headers:** Các dòng `proxy_set_header` giúp truyền thông tin địa chỉ IP thực của khách hàng xuống cho Apache và PHP, đảm bảo các tính năng bảo mật và logs trong code không bị sai lệch (hiển thị IP 127.0.0.1).
-```
