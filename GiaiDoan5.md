@@ -1,5 +1,4 @@
 
-```markdown
 # GIAI ĐOẠN 5: CẤU HÌNH DEFAULT VHOST - BẢO MẬT TRUY CẬP IP
 
 Yêu cầu: *"Bất kỳ domain nào khác trỏ về IP hoặc truy cập qua IP phải cần qua 1 default vhost"*. Đây là kỹ thuật thiết lập "phòng bảo vệ" để ngăn chặn các truy cập không xác định.
@@ -77,6 +76,6 @@ Ly có thể tự mình kiểm tra độ bảo mật của server bằng cách:
 
 
 
-Điều này chứng tỏ "tấm khiên" bảo vệ của bạn đã hoạt động hoàn hảo, giúp giấu kín các website thực tế phía sau.
-```
+Điều này chứng tỏ "tấm khiên" bảo vệ đã hoạt động hoàn hảo, giúp giấu kín các website thực tế phía sau.
+
 
