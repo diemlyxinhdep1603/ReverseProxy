@@ -1,5 +1,5 @@
 
-```markdown
+
 # GIAI ĐOẠN 3: CẤU HÌNH APACHE VIRTUAL HOST (XỬ LÝ LOGIC)
 
 Sau khi đã mở các cổng phụ (8080 và 8443) ở Giai đoạn 2, Apache hiện giống như một tòa nhà đã mở cửa nhưng chưa chia phòng ban. Giai đoạn này chúng ta sẽ thiết lập **Virtual Host (VHost)** để định danh từng website.
@@ -119,4 +119,4 @@ Cuối cùng, khởi động lại Apache:
 ```bash
 sudo systemctl restart apache2
 ```
-```
+
