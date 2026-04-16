@@ -1,6 +1,6 @@
 
 
-```
+
 # BÁO CÁO KIẾN TRÚC HỆ THỐNG: TỐI ƯU HÓA REVERSE PROXY NGINX & APACHE
 
 ## 1. Tổng quan về sự chuyển đổi kiến trúc
@@ -81,5 +81,4 @@ Cấu hình này tuân thủ yêu cầu khắt khe về **Mã hóa đầu cuối
 * **Bảo mật nội bộ:** Dữ liệu được bảo vệ ngay cả khi di chuyển giữa các dịch vụ trong máy chủ.
 * **Nhận diện giao thức:** Giúp Framework (Laravel/WP) nhận diện chính xác giao thức khách đang dùng, tránh lỗi vòng lặp chuyển hướng (Redirect Loop).
 
----
-```
+
