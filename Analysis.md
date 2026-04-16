@@ -65,7 +65,7 @@ Tạo ra một hệ thống vừa phản hồi siêu tốc, vừa xử lý logic
 
 ---
 
-## 4. Giải trình chuyên môn (Phản hồi yêu cầu của Leader)
+## 4. Giải thích
 
 ### 4.1 Vì sao Nginx lại đứng trước Apache?
 * **Chịu tải cao (High Concurrency):** Nginx xử lý file tĩnh nhanh gấp nhiều lần Apache với mức RAM cực thấp, giúp hệ thống không bị treo khi có lượng lớn người truy cập đồng thời.
