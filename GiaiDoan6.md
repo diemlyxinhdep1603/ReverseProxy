@@ -132,7 +132,7 @@ Quy trình xử lý chuẩn bao gồm 4 bước kỹ thuật sau:
    ```sql
    SELECT ID, user_login FROM Sa3QIZ_users; 
    ```
-3. Đổi mật khẩu cho user ID 5 thành mật khẩu mới (VD: `Ly@2026`) bằng hàm mã hóa MD5:
+3. Đổi mật khẩu cho user ID 5 thành mật khẩu mới (`Ly@2026`) bằng hàm mã hóa MD5:
    ```sql
    UPDATE Sa3QIZ_users SET user_pass = MD5('Ly@2026') WHERE ID = 5;
    ```
