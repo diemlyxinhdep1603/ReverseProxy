@@ -60,7 +60,7 @@ sudo systemctl restart nginx
 
 ---
 
-## 3. Giải thích từ khóa kỹ thuật (Dành cho Leader)
+## 3. Giải thích từ khóa kỹ thuật 
 
 * **`default_server`**: Đây là từ khóa quan trọng nhất. Nó ra lệnh cho Nginx rằng: "Nếu yêu cầu của khách không khớp với bất kỳ `server_name` nào trong các website khác, hãy tống họ vào đây".
 * **`server_name _`**: Dấu gạch dưới đại diện cho một tên miền không xác định hoặc truy cập trực tiếp bằng địa chỉ IP.
@@ -70,7 +70,7 @@ sudo systemctl restart nginx
 
 ## 4. Kiểm chứng thành quả
 
-Ly có thể tự mình kiểm tra độ bảo mật của server bằng cách:
+Kiểm tra độ bảo mật của server bằng cách:
 1. Mở trình duyệt, gõ thẳng địa chỉ IP: `http://221.132.21.142`.
 2. **Kết quả chuẩn:** Màn hình phải hiển thị dòng chữ trắng trên nền đen: **"403 Forbidden"**.
 
