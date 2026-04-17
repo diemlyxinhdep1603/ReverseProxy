@@ -18,7 +18,7 @@ sudo nano /var/www/source_wq/wp-config.php
 * `DB_NAME`: 'wordpress_db'
 * `DB_USER`: 'wp_ly' (User bạn đã tạo)
 * `DB_PASSWORD`: 'Ly@Vietnix2026!Wp'
-* `$table_prefix`: **'Sa3QIZ_'** (Đây là điểm mấu chốt, phải khớp với tiền tố bảng trong file .sql của Leader).
+* `$table_prefix`: **'Sa3QIZ_'** (Đây là điểm mấu chốt, phải khớp với tiền tố bảng trong file .sql).
 
 **Ép tên miền mới (Fix lỗi nhảy sang trang linhlt.id.vn):**
 Thêm 2 dòng này vào trên dòng `/* That's all, stop editing! */`:
@@ -57,7 +57,7 @@ DB_PASSWORD=Ly@Laravel2026!Sec
 
 ---
 
-## 3. Nhật ký Debug: Xử lý các lỗi nghiêm trọng
+## 3. Nhật ký Debug: 
 
 Trong quá trình triển khai, chúng ta đã đối mặt và xử lý thành công các lỗi sau:
 
@@ -93,3 +93,65 @@ Hệ thống đã vận hành hoàn hảo với các chỉ số:
 * **Mã phản hồi:** 200 OK.
 * **SSL:** Hợp lệ (Green Lock).
 * **Giao diện:** Hiển thị đúng nội dung của dự án KIA K5 và Coza Store.
+
+
+## 6. Xử lý lỗi "Hardcoded Links" sau khi Migrate Website
+
+### 6.1. Định nghĩa lỗi "Hardcoded Links" là gì?
+Lỗi **Hardcoded Links (Đường dẫn bị viết chết/viết cứng)** thường xảy ra sau khi chuyển dữ liệu (Migrate) một website WordPress từ môi trường cũ (máy Leader) sang môi trường mới (VPS Production).
+
+* **Bản chất vấn đề:** WordPress và các Plugin (Trình dựng trang, menu, slider...) lưu trực tiếp tên miền cũ (`linhlt.id.vn`) vào thẳng cơ sở dữ liệu (Database) dưới dạng văn bản tĩnh.
+* **Biểu hiện:** Mặc dù đã cấu hình URL mới trong file `wp-config.php`, nhưng khi người dùng click vào logo, hình ảnh, hoặc các liên kết trên menu, trình duyệt vẫn tự động điều hướng sang trang web cũ hoặc báo lỗi bảo mật (SSL không hợp lệ).
+
+### 6.2. Phương pháp tiếp cận và giải quyết
+Để xử lý triệt để, hệ thống yêu cầu can thiệp trực tiếp vào Database. Tuy nhiên, **không được sử dụng lệnh SQL `UPDATE` thông thường** cho toàn bộ dữ liệu. 
+
+* **Lý do:** WordPress lưu trữ nhiều cấu hình dưới định dạng **Serialized Data (Dữ liệu chuỗi hóa)**. Việc dùng lệnh `UPDATE` thuần túy để thay đổi số lượng ký tự của tên miền sẽ làm hỏng (corrupt) cấu trúc mảng dữ liệu, dẫn đến lỗi trắng trang (Fatal Error).
+* **Hướng giải quyết:** Bắt buộc sử dụng Plugin chuyên dụng có khả năng đọc/ghi Serialized Data để tìm và thay thế (Search & Replace) tên miền an toàn.
+
+---
+
+### 6.3. Quy trình thực hành 
+
+Quy trình xử lý chuẩn bao gồm 4 bước kỹ thuật sau:
+
+#### Bước 1: Nâng quyền Administrator qua dòng lệnh SQL (Privilege Escalation)
+Để cài đặt công cụ sửa lỗi, tài khoản hiện tại cần quyền Administrator. Thực hiện can thiệp DB qua giao diện dòng lệnh (Terminal):
+
+1. Truy cập MySQL trên VPS: `mysql -u root -p`
+2. Truy vấn ID của user hiện tại (Giả sử ID là 5):
+   ```sql
+   SELECT ID, user_login FROM Sa3QIZ_users; 
+   ```
+3. Cấp quyền Administrator và mức độ ưu tiên cao nhất cho ID 5:
+   ```sql
+   UPDATE Sa3QIZ_usermeta SET meta_value = 'a:1:{s:13:"administrator";b:1;}' WHERE user_id = 5 AND meta_key = 'Sa3QIZ_capabilities';
+   UPDATE Sa3QIZ_usermeta SET meta_value = '10' WHERE user_id = 5 AND meta_key = 'Sa3QIZ_user_level';
+   ```
+* **Mục đích:** Khôi phục toàn quyền quản trị, cho phép truy cập menu **Giao diện (Appearance)** và **Gói mở rộng (Plugins)** trên trang Dashboard.
+
+#### Bước 2: Cài đặt công cụ Better Search Replace
+1. Đăng nhập trang quản trị WordPress.
+2. Điều hướng tới **Plugin** -> **Cài mới (Add New)**.
+3. Tìm kiếm, Cài đặt và **Kích hoạt** plugin **Better Search Replace**.
+* **Mục đích:** Sử dụng công cụ chuyên dụng để tháo gỡ chuỗi Serialized Data, thay thế tên miền an toàn và đóng gói lại mà không làm vỡ cấu trúc Database.
+
+#### Bước 3: Thực thi quét và thay thế tên miền (Serializing Search & Replace)
+Truy cập **Công cụ (Tools)** -> **Better Search Replace** và thực hiện quét 2 lần để đảm bảo không sót giao thức:
+
+* **Lần 1 (Quét HTTP):**
+  * **Search for:** `http://linhlt.id.vn`
+  * **Replace with:** `https://wp.diemly.vietnix.tech`
+* **Lần 2 (Quét HTTPS - Xử lý triệt để):**
+  * **Search for:** `https://linhlt.id.vn`
+  * **Replace with:** `https://wp.diemly.vietnix.tech`
+
+**Cấu hình bắt buộc khi chạy:**
+1. **Select tables:** Chọn toàn bộ bảng trong danh sách. Link cũ có thể nằm ở bất kỳ bảng nào (cấu hình plugin, bài viết, menu...).
+2. Bỏ chọn ô **Run as dry run?** (Chạy thử). Nếu không bỏ chọn, hệ thống chỉ báo cáo mô phỏng mà không thực hiện thay đổi dữ liệu thực tế.
+
+#### Bước 4: Xóa bộ nhớ đệm (Clear Cache)
+Ngay cả khi Database đã chuẩn, giao diện vẫn có thể lưu cache cũ. Cần làm mới ở 2 tầng:
+
+1. **Tầng Server (LiteSpeed Cache):** Trên thanh công cụ Admin, chọn biểu tượng LiteSpeed -> Nhấp **Purge All (Xóa tất cả)**. Thao tác này xóa các file snapshot HTML tĩnh mang tên miền cũ trên Server.
+2. **Tầng Trình duyệt (Client Cache):** Truy cập trang chủ, nhấn **Ctrl + F5** (Windows) hoặc **Cmd + Shift + R** (Mac) để thực hiện Hard Reload, ép trình duyệt tải lại toàn bộ tài nguyên mới nhất từ VPS.
