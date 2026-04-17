@@ -46,7 +46,7 @@ graph TD
     style DefaultVhost fill:#cc0000,stroke:#fff,stroke-width:2px,color:#fff
 ```
 
-### Giải thích sơ đồ cho người mới:
+### Giải thích sơ đồ:
 1.  **Giai đoạn tiếp nhận:** Nginx đóng vai trò "Lễ tân" tại cổng chuẩn 80/443. Mọi truy cập không đúng tên miền khai báo sẽ bị đẩy sang **Default Vhost** để chặn (403).
 2.  **Phân loại yêu cầu:** * Nếu khách cần xem ảnh hoặc giao diện (File tĩnh), Nginx tự phục vụ ngay mà không cần làm phiền Apache.
     * Nếu khách cần đăng nhập hoặc tính năng (File động), Nginx đẩy sang cho Apache xử lý.
