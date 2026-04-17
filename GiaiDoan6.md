@@ -77,7 +77,7 @@ Trong quá trình triển khai, chúng ta đã đối mặt và xử lý thành 
 
 ---
 
-## 4. Công cụ kiểm tra (Bảo bối của SysAdmin)
+## 4. Công cụ kiểm tra
 
 Để chứng minh hệ thống chạy đúng, chúng ta sử dụng lệnh theo dõi log thời gian thực:
 
