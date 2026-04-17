@@ -88,7 +88,7 @@ sudo nano /etc/apache2/sites-available/laravel.diemly.vietnix.tech.conf
 
 ---
 
-## 3. Giải trình mã lệnh (Dành cho Leader)
+## 3. Giải trình mã lệnh 
 
 * **`<VirtualHost *:8080>` và `<VirtualHost *:8443>`**: Đáp ứng yêu cầu "HTTP đi với HTTP, HTTPS đi với HTTPS". Việc tách biệt giúp Apache phân loại luồng dữ liệu và sử dụng đúng khóa SSL (`SSLEngine on`) cho luồng 8443.
 * **DocumentRoot (Laravel vs WordPress)**: 
